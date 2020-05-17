@@ -13,11 +13,11 @@ namespace Data
         {
         }
 
-        public DbSet<User> Users { get; set; }
-        public DbSet<UserRol> UserRoles { get; set; }
-        public DbSet<UserBranchOffice> UserBranchOffices { get; set; }
-        public DbSet<BranchOffice> BranchOffices { get; set; }
-        public DbSet<Tenant> Tenants { get; set; }
+        public DbSet<User> User { get; set; }
+        public DbSet<UserRol> UserRole { get; set; }
+        public DbSet<UserBranchOffice> UserBranchOffice { get; set; }
+        public DbSet<BranchOffice> BranchOffice { get; set; }
+        public DbSet<Tenant> Tenant { get; set; }
         public DbSet<Category> Category { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)

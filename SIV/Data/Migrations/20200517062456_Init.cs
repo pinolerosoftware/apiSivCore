@@ -3,12 +3,12 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Data.Migrations
 {
-    public partial class init : Migration
+    public partial class Init : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Tenants",
+                name: "Tenant",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
@@ -19,26 +19,11 @@ namespace Data.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Tenants", x => x.Id);
+                    table.PrimaryKey("PK_Tenant", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
-                name: "UserRoles",
-                columns: table => new
-                {
-                    Id = table.Column<string>(nullable: false),
-                    Name = table.Column<string>(nullable: true),
-                    NormalizedName = table.Column<string>(nullable: true),
-                    ConcurrencyStamp = table.Column<string>(nullable: true),
-                    Description = table.Column<string>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_UserRoles", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Users",
+                name: "User",
                 columns: table => new
                 {
                     Id = table.Column<string>(nullable: false),
@@ -61,11 +46,26 @@ namespace Data.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Users", x => x.Id);
+                    table.PrimaryKey("PK_User", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
-                name: "BranchOffices",
+                name: "UserRole",
+                columns: table => new
+                {
+                    Id = table.Column<string>(nullable: false),
+                    Name = table.Column<string>(nullable: true),
+                    NormalizedName = table.Column<string>(nullable: true),
+                    ConcurrencyStamp = table.Column<string>(nullable: true),
+                    Description = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_UserRole", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "BranchOffice",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
@@ -83,17 +83,44 @@ namespace Data.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_BranchOffices", x => x.Id);
+                    table.PrimaryKey("PK_BranchOffice", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_BranchOffices_Tenants_TenantId",
+                        name: "FK_BranchOffice_Tenant_TenantId",
                         column: x => x.TenantId,
-                        principalTable: "Tenants",
+                        principalTable: "Tenant",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "UserBranchOffices",
+                name: "Category",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    RowCode = table.Column<Guid>(nullable: false),
+                    CreateAt = table.Column<DateTime>(nullable: false),
+                    UpdateAt = table.Column<DateTime>(nullable: false),
+                    DeleteAt = table.Column<DateTime>(nullable: false),
+                    UserCreated = table.Column<int>(nullable: false),
+                    TenantId = table.Column<int>(nullable: false),
+                    Active = table.Column<bool>(nullable: false),
+                    Name = table.Column<string>(maxLength: 50, nullable: false),
+                    Description = table.Column<string>(maxLength: 200, nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Category", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Category_Tenant_TenantId",
+                        column: x => x.TenantId,
+                        principalTable: "Tenant",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "UserBranchOffice",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
@@ -104,53 +131,61 @@ namespace Data.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_UserBranchOffices", x => x.Id);
+                    table.PrimaryKey("PK_UserBranchOffice", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_UserBranchOffices_BranchOffices_BranchOfficeId",
+                        name: "FK_UserBranchOffice_BranchOffice_BranchOfficeId",
                         column: x => x.BranchOfficeId,
-                        principalTable: "BranchOffices",
+                        principalTable: "BranchOffice",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_UserBranchOffices_Users_UserId1",
+                        name: "FK_UserBranchOffice_User_UserId1",
                         column: x => x.UserId1,
-                        principalTable: "Users",
+                        principalTable: "User",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_BranchOffices_TenantId",
-                table: "BranchOffices",
+                name: "IX_BranchOffice_TenantId",
+                table: "BranchOffice",
                 column: "TenantId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_UserBranchOffices_BranchOfficeId",
-                table: "UserBranchOffices",
+                name: "IX_Category_TenantId",
+                table: "Category",
+                column: "TenantId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_UserBranchOffice_BranchOfficeId",
+                table: "UserBranchOffice",
                 column: "BranchOfficeId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_UserBranchOffices_UserId1",
-                table: "UserBranchOffices",
+                name: "IX_UserBranchOffice_UserId1",
+                table: "UserBranchOffice",
                 column: "UserId1");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "UserBranchOffices");
+                name: "Category");
 
             migrationBuilder.DropTable(
-                name: "UserRoles");
+                name: "UserBranchOffice");
 
             migrationBuilder.DropTable(
-                name: "BranchOffices");
+                name: "UserRole");
 
             migrationBuilder.DropTable(
-                name: "Users");
+                name: "BranchOffice");
 
             migrationBuilder.DropTable(
-                name: "Tenants");
+                name: "User");
+
+            migrationBuilder.DropTable(
+                name: "Tenant");
         }
     }
 }
