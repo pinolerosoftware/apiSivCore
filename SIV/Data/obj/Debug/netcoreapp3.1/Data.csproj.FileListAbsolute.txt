@@ -1,5 +1,12 @@
 C:\Users\johan\source\repos\apiSivCore\SIV\Data\bin\Debug\netcoreapp3.1\Data.deps.json
 C:\Users\johan\source\repos\apiSivCore\SIV\Data\bin\Debug\netcoreapp3.1\Data.dll
-C:\Users\johan\source\repos\apiSivCore\SIV\Data\obj\Debug\netcoreapp3.1\Data.csprojAssemblyReference.cache
 C:\Users\johan\source\repos\apiSivCore\SIV\Data\obj\Debug\netcoreapp3.1\Data.AssemblyInfoInputs.cache
 C:\Users\johan\source\repos\apiSivCore\SIV\Data\obj\Debug\netcoreapp3.1\Data.AssemblyInfo.cs
+C:\Users\johan\source\repos\apiSivCore\SIV\Data\bin\Debug\netcoreapp3.1\Data.pdb
+C:\Users\johan\source\repos\apiSivCore\SIV\Data\obj\Debug\netcoreapp3.1\Data.dll
+C:\Users\johan\source\repos\apiSivCore\SIV\Data\obj\Debug\netcoreapp3.1\Data.pdb
+C:\Users\johan\source\repos\apiSivCore\SIV\Data\bin\Debug\netcoreapp3.1\Data.runtimeconfig.json
+C:\Users\johan\source\repos\apiSivCore\SIV\Data\bin\Debug\netcoreapp3.1\Data.runtimeconfig.dev.json
+C:\Users\johan\source\repos\apiSivCore\SIV\Data\obj\Debug\netcoreapp3.1\Data.genruntimeconfig.cache
+C:\Users\johan\source\repos\apiSivCore\SIV\Data\obj\Debug\netcoreapp3.1\Data.csproj.CoreCompileInputs.cache
+C:\Users\johan\source\repos\apiSivCore\SIV\Data\obj\Debug\netcoreapp3.1\Data.csprojAssemblyReference.cache
