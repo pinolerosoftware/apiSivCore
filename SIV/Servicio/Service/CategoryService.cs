@@ -4,27 +4,22 @@ using Data;
 using Data.Entities;
 using Repository.Interface;
 using Repository.Repository;
-using Services.Dto;
 using Services.Interface;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
+using Dto;
+using Singleton;
 
 namespace Services.Service
 {
     public class CategoryService : ICategoryService
     {
         protected readonly SivContext db;
-        protected readonly IMapper Mapper;
-
         public IBaseRepository<Category> CategoryRepository { get; set; }
-
         public CategoryService(SivContext context)
         {
             db = context;
-            CategoryRepository = new BaseRepository<Category>(context);
-            Mapper = Mappers.GetMapper();
+            CategoryRepository = new BaseRepository<Category>(context);            
         }
         /// <summary>
         /// Method create category
@@ -33,17 +28,15 @@ namespace Services.Service
         /// <returns>Data Category <see cref="CategoryDtoOutput"/></returns>
         public CategoryDtoOutput Create(CategoryDtoInput categoryInput)
         {
-            try
-            {                
-                var newCategory = Mapper.Map<CategoryDtoInput, Category>(categoryInput);                
-                var result = CategoryRepository.Create(newCategory);
-                var categoryResult = Mapper.Map<Category, CategoryDtoOutput>(result);
-                return categoryResult;
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
+            if (string.IsNullOrEmpty(categoryInput.name))
+                throw new ArgumentException("Tiene que ingresar el nombre de la categoria");
+            if (categoryInput.tenantId == default(int))
+                throw new ArgumentException("Los datos proporcionados estan incompletos");
+            var newCategory = MapperSingleton.Mapper.Map<CategoryDtoInput, Category>(categoryInput);
+            newCategory.CreateAt = DateTime.Now;                
+            var result = CategoryRepository.Create(newCategory);
+            var categoryResult = MapperSingleton.Mapper.Map<Category, CategoryDtoOutput>(result);
+            return categoryResult;
         }
         /// <summary>
         /// Method update category
@@ -52,17 +45,23 @@ namespace Services.Service
         /// <returns>Data category <see cref="CategoryDtoOutput"/></returns>
         public CategoryDtoOutput Update(CategoryDtoInput categoryInput)
         {
-            try
-            {
-                var updateCategory = Mapper.Map<CategoryDtoInput, Category>(categoryInput);                
-                var result = CategoryRepository.Update(updateCategory);
-                var category = Mapper.Map<Category, CategoryDtoOutput>(updateCategory);
-                return category;
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
+            if (string.IsNullOrEmpty(categoryInput.name))
+                throw new ArgumentException("Tiene que ingresar el nombre de la categoria");
+            if (categoryInput.tenantId == default)
+                throw new ArgumentException("Los datos proporcionados estan incompletos");
+            if(categoryInput.id == default)
+                throw new ArgumentException("Los datos proporcionados estan incompletos falta el id");
+            var updateCategory = CategoryRepository
+                                    .FindBy(category => category.Id == categoryInput.id && category.TenantId == categoryInput.tenantId)
+                                    .FirstOrDefault();
+            if(updateCategory == null)
+                throw new ArgumentException("No se encontro registro para modificar");
+            updateCategory.Name = categoryInput.name;
+            updateCategory.Description = categoryInput.description;
+            updateCategory.UpdateAt = DateTime.Now;
+            var result = CategoryRepository.Update(updateCategory);
+            var category = MapperSingleton.Mapper.Map<Category, CategoryDtoOutput>(updateCategory);
+            return category;
         }
         /// <summary>
         /// Method delete category
@@ -70,10 +69,19 @@ namespace Services.Service
         /// <param name="categoryInput">Data category</param>
         /// <returns>Data category <see cref="CategoryDtoOutput"/></returns>
         public CategoryDtoOutput Delete(CategoryDtoInput categoryInput)
-        {   
-            var categoryDelete = CategoryRepository.FindById(categoryInput.id);
-            var result = CategoryRepository.Delete(categoryDelete);
-            var category = Mapper.Map<Category, CategoryDtoOutput>(categoryDelete);
+        {
+            if (categoryInput.tenantId == default)
+                throw new ArgumentException("Los datos proporcionados estan incompletos");
+            if (categoryInput.id == default)
+                throw new ArgumentException("Los datos proporcionados estan incompletos falta el id");
+            var categoryDelete = CategoryRepository
+                                    .FindBy(category => category.Id == categoryInput.id && category.TenantId == categoryInput.tenantId)
+                                    .FirstOrDefault();
+            if (categoryDelete == null)
+                throw new ArgumentException("No se encontro registro para eliminar");
+            categoryDelete.Active = false;
+            var result = CategoryRepository.Update(categoryDelete);
+            var category = MapperSingleton.Mapper.Map<Category, CategoryDtoOutput>(result);
             return category;
         }
         /// <summary>
@@ -88,7 +96,7 @@ namespace Services.Service
                             .FindBy(category => category.TenantId == tenantId && category.Id == id);
             if (result == null)
                 return null;
-            var category = Mapper.Map<Category, CategoryDtoOutput>(result.FirstOrDefault());
+            var category = MapperSingleton.Mapper.Map<Category, CategoryDtoOutput>(result.FirstOrDefault());
             return category;
         }
         /// <summary>
@@ -100,7 +108,7 @@ namespace Services.Service
         {
             var categorys = CategoryRepository
                                 .FindBy(category => category.TenantId == tenanId)
-                                .ProjectTo<CategoryDtoOutput>(Mapper.ConfigurationProvider)
+                                .ProjectTo<CategoryDtoOutput>(MapperSingleton.Mapper.ConfigurationProvider)
                                 .AsQueryable();                                
             return categorys;
         }

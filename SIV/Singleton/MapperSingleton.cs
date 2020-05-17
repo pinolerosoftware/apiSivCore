@@ -1,23 +1,32 @@
 ﻿using AutoMapper;
 using Data.Entities;
-using Services.Dto;
+using Dto;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Services
+namespace Singleton
 {
-    public class Mappers
+    public sealed class MapperSingleton
     {
-        public static IMapper GetMapper()
+        private static IMapper _Mapper;
+        private MapperSingleton() { }
+        public static IMapper Mapper
         {
-            var config = new MapperConfiguration(cfg => {
-                cfg.AddProfile<MapperProfile>();
-            });
-            return config.CreateMapper();
+            get
+            {
+                if (_Mapper == null)
+                {
+                    var config = new MapperConfiguration(cfg => {
+                        cfg.AddProfile<MapperProfile>();
+                    });
+                    _Mapper = config.CreateMapper();
+                }
+
+                return _Mapper;
+            }
         }
     }
-
     public class MapperProfile : Profile
     {
         public MapperProfile()
@@ -30,8 +39,9 @@ namespace Services
                 .ForMember(origin => origin.id, destination => destination.MapFrom(category => category.Id))
                 .ForMember(origin => origin.name, destination => destination.MapFrom(category => category.Name))
                 .ForMember(origin => origin.description, destination => destination.MapFrom(category => category.Description))
+                .ForMember(origin => origin.createAt, destination => destination.MapFrom(category => category.CreateAt))
                 .ReverseMap();
-            
+
         }
     }
 }

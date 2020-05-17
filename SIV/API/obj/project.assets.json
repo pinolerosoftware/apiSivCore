@@ -2,6 +2,19 @@
   "version": 3,
   "targets": {
     ".NETCoreApp,Version=v3.1": {
+      "AutoMapper/9.0.0": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.CSharp": "4.5.0",
+          "System.Reflection.Emit": "4.3.0"
+        },
+        "compile": {
+          "lib/netstandard2.0/AutoMapper.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/AutoMapper.dll": {}
+        }
+      },
       "Microsoft.AspNetCore.Cryptography.Internal/3.1.4": {
         "type": "package",
         "compile": {
@@ -1806,7 +1819,7 @@
           "System.Runtime": "4.3.0"
         },
         "compile": {
-          "ref/netstandard1.1/_._": {}
+          "ref/netstandard1.1/System.Reflection.Emit.dll": {}
         },
         "runtime": {
           "lib/netstandard1.3/System.Reflection.Emit.dll": {}
@@ -1820,7 +1833,7 @@
           "System.Runtime": "4.3.0"
         },
         "compile": {
-          "ref/netstandard1.0/_._": {}
+          "ref/netstandard1.0/System.Reflection.Emit.ILGeneration.dll": {}
         },
         "runtime": {
           "lib/netstandard1.3/System.Reflection.Emit.ILGeneration.dll": {}
@@ -2595,6 +2608,16 @@
           "bin/placeholder/Data.dll": {}
         }
       },
+      "Dto/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v3.1",
+        "compile": {
+          "bin/placeholder/Dto.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Dto.dll": {}
+        }
+      },
       "Repository/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v3.1",
@@ -2613,7 +2636,9 @@
         "framework": ".NETCoreApp,Version=v3.1",
         "dependencies": {
           "Data": "1.0.0",
-          "Repository": "1.0.0"
+          "Dto": "1.0.0",
+          "Repository": "1.0.0",
+          "Singleton": "1.0.0"
         },
         "compile": {
           "bin/placeholder/Services.dll": {}
@@ -2621,10 +2646,42 @@
         "runtime": {
           "bin/placeholder/Services.dll": {}
         }
+      },
+      "Singleton/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v3.1",
+        "dependencies": {
+          "AutoMapper": "9.0.0",
+          "Data": "1.0.0",
+          "Dto": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/Singleton.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Singleton.dll": {}
+        }
       }
     }
   },
   "libraries": {
+    "AutoMapper/9.0.0": {
+      "sha512": "xCqvoxT4HIrNY/xlXG9W+BA/awdrhWvMTKTK/igkGSRbhOhpl3Q8O8Gxlhzjc9JsYqE7sS6AxgyuUUvZ6R5/Bw==",
+      "type": "package",
+      "path": "automapper/9.0.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "automapper.9.0.0.nupkg.sha512",
+        "automapper.nuspec",
+        "lib/net461/AutoMapper.dll",
+        "lib/net461/AutoMapper.pdb",
+        "lib/net461/AutoMapper.xml",
+        "lib/netstandard2.0/AutoMapper.dll",
+        "lib/netstandard2.0/AutoMapper.pdb",
+        "lib/netstandard2.0/AutoMapper.xml"
+      ]
+    },
     "Microsoft.AspNetCore.Cryptography.Internal/3.1.4": {
       "sha512": "P6o80rVMEDv7zQQmIDoeoXHAXfS+bj2iwh5iURfd1EKrojxqVJW3zTYld2nleryT7BBlL7J0aT54tyLZyj8YRg==",
       "type": "package",
@@ -8501,6 +8558,11 @@
       "path": "../Data/Data.csproj",
       "msbuildProject": "../Data/Data.csproj"
     },
+    "Dto/1.0.0": {
+      "type": "project",
+      "path": "../Dto/Dto.csproj",
+      "msbuildProject": "../Dto/Dto.csproj"
+    },
     "Repository/1.0.0": {
       "type": "project",
       "path": "../Repository/Repository.csproj",
@@ -8510,6 +8572,11 @@
       "type": "project",
       "path": "../Servicio/Services.csproj",
       "msbuildProject": "../Servicio/Services.csproj"
+    },
+    "Singleton/1.0.0": {
+      "type": "project",
+      "path": "../Singleton/Singleton.csproj",
+      "msbuildProject": "../Singleton/Singleton.csproj"
     }
   },
   "projectFileDependencyGroups": {
@@ -8523,19 +8590,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\johan\\.nuget\\packages\\": {}
+    "C:\\Users\\feliz\\.nuget\\packages\\": {},
+    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\johan\\source\\repos\\apiSivCore\\SIV\\API\\API.csproj",
+      "projectUniqueName": "C:\\Users\\feliz\\Desktop\\API SIV\\apiSivCore\\SIV\\API\\API.csproj",
       "projectName": "API",
-      "projectPath": "C:\\Users\\johan\\source\\repos\\apiSivCore\\SIV\\API\\API.csproj",
-      "packagesPath": "C:\\Users\\johan\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\johan\\source\\repos\\apiSivCore\\SIV\\API\\obj\\",
+      "projectPath": "C:\\Users\\feliz\\Desktop\\API SIV\\apiSivCore\\SIV\\API\\API.csproj",
+      "packagesPath": "C:\\Users\\feliz\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\feliz\\Desktop\\API SIV\\apiSivCore\\SIV\\API\\obj\\",
       "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+      ],
       "configFilePaths": [
-        "C:\\Users\\johan\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\feliz\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -8548,11 +8619,11 @@
       "frameworks": {
         "netcoreapp3.1": {
           "projectReferences": {
-            "C:\\Users\\johan\\source\\repos\\apiSivCore\\SIV\\Data\\Data.csproj": {
-              "projectPath": "C:\\Users\\johan\\source\\repos\\apiSivCore\\SIV\\Data\\Data.csproj"
+            "C:\\Users\\feliz\\Desktop\\API SIV\\apiSivCore\\SIV\\Data\\Data.csproj": {
+              "projectPath": "C:\\Users\\feliz\\Desktop\\API SIV\\apiSivCore\\SIV\\Data\\Data.csproj"
             },
-            "C:\\Users\\johan\\source\\repos\\apiSivCore\\SIV\\Servicio\\Services.csproj": {
-              "projectPath": "C:\\Users\\johan\\source\\repos\\apiSivCore\\SIV\\Servicio\\Services.csproj"
+            "C:\\Users\\feliz\\Desktop\\API SIV\\apiSivCore\\SIV\\Servicio\\Services.csproj": {
+              "projectPath": "C:\\Users\\feliz\\Desktop\\API SIV\\apiSivCore\\SIV\\Servicio\\Services.csproj"
             }
           }
         }
@@ -8605,7 +8676,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.201\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.101\\RuntimeIdentifierGraph.json"
       }
     }
   }

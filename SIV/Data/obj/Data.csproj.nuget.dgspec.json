@@ -1,20 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\johan\\source\\repos\\apiSivCore\\SIV\\Data\\Data.csproj": {}
+    "C:\\Users\\feliz\\Desktop\\API SIV\\apiSivCore\\SIV\\Data\\Data.csproj": {}
   },
   "projects": {
-    "C:\\Users\\johan\\source\\repos\\apiSivCore\\SIV\\Data\\Data.csproj": {
+    "C:\\Users\\feliz\\Desktop\\API SIV\\apiSivCore\\SIV\\Data\\Data.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\johan\\source\\repos\\apiSivCore\\SIV\\Data\\Data.csproj",
+        "projectUniqueName": "C:\\Users\\feliz\\Desktop\\API SIV\\apiSivCore\\SIV\\Data\\Data.csproj",
         "projectName": "Data",
-        "projectPath": "C:\\Users\\johan\\source\\repos\\apiSivCore\\SIV\\Data\\Data.csproj",
-        "packagesPath": "C:\\Users\\johan\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\johan\\source\\repos\\apiSivCore\\SIV\\Data\\obj\\",
+        "projectPath": "C:\\Users\\feliz\\Desktop\\API SIV\\apiSivCore\\SIV\\Data\\Data.csproj",
+        "packagesPath": "C:\\Users\\feliz\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\feliz\\Desktop\\API SIV\\apiSivCore\\SIV\\Data\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
         "configFilePaths": [
-          "C:\\Users\\johan\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\feliz\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -82,7 +85,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.201\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.101\\RuntimeIdentifierGraph.json"
         }
       }
     }

@@ -5100,19 +5100,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\johan\\.nuget\\packages\\": {}
+    "C:\\Users\\feliz\\.nuget\\packages\\": {},
+    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\johan\\source\\repos\\apiSivCore\\SIV\\Repository\\Repository.csproj",
+      "projectUniqueName": "C:\\Users\\feliz\\Desktop\\API SIV\\apiSivCore\\SIV\\Repository\\Repository.csproj",
       "projectName": "Repository",
-      "projectPath": "C:\\Users\\johan\\source\\repos\\apiSivCore\\SIV\\Repository\\Repository.csproj",
-      "packagesPath": "C:\\Users\\johan\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\johan\\source\\repos\\apiSivCore\\SIV\\Repository\\obj\\",
+      "projectPath": "C:\\Users\\feliz\\Desktop\\API SIV\\apiSivCore\\SIV\\Repository\\Repository.csproj",
+      "packagesPath": "C:\\Users\\feliz\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\feliz\\Desktop\\API SIV\\apiSivCore\\SIV\\Repository\\obj\\",
       "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+      ],
       "configFilePaths": [
-        "C:\\Users\\johan\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\feliz\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -5125,8 +5129,8 @@
       "frameworks": {
         "netcoreapp3.1": {
           "projectReferences": {
-            "C:\\Users\\johan\\source\\repos\\apiSivCore\\SIV\\Data\\Data.csproj": {
-              "projectPath": "C:\\Users\\johan\\source\\repos\\apiSivCore\\SIV\\Data\\Data.csproj"
+            "C:\\Users\\feliz\\Desktop\\API SIV\\apiSivCore\\SIV\\Data\\Data.csproj": {
+              "projectPath": "C:\\Users\\feliz\\Desktop\\API SIV\\apiSivCore\\SIV\\Data\\Data.csproj"
             }
           }
         }
@@ -5154,7 +5158,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.201\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.101\\RuntimeIdentifierGraph.json"
       }
     }
   }

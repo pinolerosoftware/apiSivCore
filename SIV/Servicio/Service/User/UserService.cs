@@ -1,6 +1,6 @@
 ﻿using Data;
 using Data.Entities;
-using Repository.Dto;
+using Dto;
 using Repository.Interface;
 using Repository.Repository;
 using Services.Interface;

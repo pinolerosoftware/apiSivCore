@@ -1,5 +1,5 @@
 ﻿using Data.Entities;
-using Repository.Dto;
+using Dto;
 using System;
 using System.Collections.Generic;
 using System.Text;
