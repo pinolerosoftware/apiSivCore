@@ -60,7 +60,7 @@ namespace Data.Migrations
 
                     b.HasIndex("TenantId");
 
-                    b.ToTable("BranchOffices");
+                    b.ToTable("BranchOffice");
                 });
 
             modelBuilder.Entity("Data.Entities.Category", b =>
@@ -126,7 +126,7 @@ namespace Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Tenants");
+                    b.ToTable("Tenant");
                 });
 
             modelBuilder.Entity("Data.Entities.User", b =>
@@ -188,7 +188,7 @@ namespace Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Users");
+                    b.ToTable("User");
                 });
 
             modelBuilder.Entity("Data.Entities.UserBranchOffice", b =>
@@ -213,7 +213,7 @@ namespace Data.Migrations
 
                     b.HasIndex("UserId1");
 
-                    b.ToTable("UserBranchOffices");
+                    b.ToTable("UserBranchOffice");
                 });
 
             modelBuilder.Entity("Data.Entities.UserRol", b =>
@@ -235,7 +235,7 @@ namespace Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("UserRoles");
+                    b.ToTable("UserRole");
                 });
 
             modelBuilder.Entity("Data.Entities.BranchOffice", b =>

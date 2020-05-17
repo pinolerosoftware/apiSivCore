@@ -1,4 +1,6 @@
-﻿using Data;
+﻿using AutoMapper;
+using AutoMapper.QueryableExtensions;
+using Data;
 using Data.Entities;
 using Repository.Interface;
 using Repository.Repository;
@@ -14,6 +16,7 @@ namespace Services.Service
     public class CategoryService : ICategoryService
     {
         protected readonly SivContext db;
+        protected readonly IMapper Mapper;
 
         public IBaseRepository<Category> CategoryRepository { get; set; }
 
@@ -21,6 +24,7 @@ namespace Services.Service
         {
             db = context;
             CategoryRepository = new BaseRepository<Category>(context);
+            Mapper = Mappers.GetMapper();
         }
         /// <summary>
         /// Method create category
@@ -30,19 +34,11 @@ namespace Services.Service
         public CategoryDtoOutput Create(CategoryDtoInput categoryInput)
         {
             try
-            {
-                Category newCategory = new Category();
-                newCategory.Name = categoryInput.name;
-                newCategory.Description = categoryInput.description;
-                newCategory.TenantId = categoryInput.tenantId;
+            {                
+                var newCategory = Mapper.Map<CategoryDtoInput, Category>(categoryInput);                
                 var result = CategoryRepository.Create(newCategory);
-                return new CategoryDtoOutput
-                {
-                    id = result.Id,
-                    name = result.Name,
-                    description = result.Description,
-                    tenantId = result.TenantId
-                };
+                var categoryResult = Mapper.Map<Category, CategoryDtoOutput>(result);
+                return categoryResult;
             }
             catch (Exception ex)
             {
@@ -58,17 +54,10 @@ namespace Services.Service
         {
             try
             {
-                Category newCategory = new Category();
-                newCategory.Name = categoryInput.name;
-                newCategory.Description = categoryInput.description;                
-                var result = CategoryRepository.Update(newCategory);
-                return new CategoryDtoOutput
-                {
-                    id = result.Id,
-                    name = result.Name,
-                    description = result.Description,
-                    tenantId = result.TenantId
-                };
+                var updateCategory = Mapper.Map<CategoryDtoInput, Category>(categoryInput);                
+                var result = CategoryRepository.Update(updateCategory);
+                var category = Mapper.Map<Category, CategoryDtoOutput>(updateCategory);
+                return category;
             }
             catch (Exception ex)
             {
@@ -84,13 +73,8 @@ namespace Services.Service
         {   
             var categoryDelete = CategoryRepository.FindById(categoryInput.id);
             var result = CategoryRepository.Delete(categoryDelete);
-            return new CategoryDtoOutput
-            {
-                id = result.Id,
-                name = result.Name,
-                description = result.Description,
-                tenantId = result.TenantId
-            };
+            var category = Mapper.Map<Category, CategoryDtoOutput>(categoryDelete);
+            return category;
         }
         /// <summary>
         /// Method find single 
@@ -101,18 +85,11 @@ namespace Services.Service
         public CategoryDtoOutput FindOne(int tenantId, int id)
         {
             var result = CategoryRepository
-                            .FindBy(category => category.TenantId == tenantId && category.Id == id)
-                            .Select(category => new CategoryDtoOutput
-                            {
-                                id = category.Id,
-                                name = category.Name,
-                                description = category.Description,
-                                tenantId = category.TenantId,
-
-                            });
+                            .FindBy(category => category.TenantId == tenantId && category.Id == id);
             if (result == null)
                 return null;
-            return result.FirstOrDefault();
+            var category = Mapper.Map<Category, CategoryDtoOutput>(result.FirstOrDefault());
+            return category;
         }
         /// <summary>
         /// Method to filter category
@@ -123,14 +100,8 @@ namespace Services.Service
         {
             var categorys = CategoryRepository
                                 .FindBy(category => category.TenantId == tenanId)
-                                .Select(category => new CategoryDtoOutput 
-                                {
-                                    id = category.Id,
-                                    name = category.Name,
-                                    description = category.Description,
-                                    tenantId = category.TenantId,
-                                    
-                                });
+                                .ProjectTo<CategoryDtoOutput>(Mapper.ConfigurationProvider)
+                                .AsQueryable();                                
             return categorys;
         }
     }

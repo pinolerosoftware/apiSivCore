@@ -48,7 +48,7 @@ namespace API.Controllers
             }
         }
 
-        [HttpPost, Route("[action]")]
+        [HttpPost]
         public IActionResult Post(CategoryDtoInput categoryIntput)
         {
             try
@@ -61,7 +61,7 @@ namespace API.Controllers
                 return BadRequest(ex.Message);
             }
         }
-        [HttpPut, Route("[action]")]
+        [HttpPut]
         public IActionResult Put(CategoryDtoInput categoryIntput)
         {
             try
@@ -74,7 +74,7 @@ namespace API.Controllers
                 return BadRequest(ex.Message);
             }
         }
-        [HttpDelete, Route("[action]")]
+        [HttpDelete]
         public IActionResult Delete(CategoryDtoInput categoryIntput)
         {
             try
