@@ -11,5 +11,6 @@ namespace Data.Entities
         public string Name { get; set; }
         public string SocialReazon { get; set; }
         public TypeBusiness TypeBusiness { get; set; }
+        public virtual ICollection<Category> Categories { get; set; }
     }
 }

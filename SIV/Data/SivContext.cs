@@ -18,11 +18,12 @@ namespace Data
         public DbSet<UserBranchOffice> UserBranchOffices { get; set; }
         public DbSet<BranchOffice> BranchOffices { get; set; }
         public DbSet<Tenant> Tenants { get; set; }
+        public DbSet<Category> Category { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
             builder.ApplyConfiguration(new UserConfiguration());
-
+            builder.ApplyConfiguration(new CategoryConfiguration());
             base.OnModelCreating(builder);
         }
 
